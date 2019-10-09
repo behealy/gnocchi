@@ -1,4 +1,4 @@
-package pords
+package program
 
 import (
 	"errors"

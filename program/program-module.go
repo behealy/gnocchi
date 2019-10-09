@@ -1,4 +1,4 @@
-package pords
+package program
 
 // ProgramState - Int type for specifiying current state of a program
 type ProgramState int

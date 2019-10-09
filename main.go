@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"strings"
 
-	"bitbucket.org/ebolasauce/pords"
+	"github.com/behealy/gnocchi/program"
 	"github.com/howeyc/gopass"
 )
 
@@ -17,7 +17,7 @@ func main() {
 	debug := *flag.Bool("debug", false, "Boolean - Set debug to view verbose logs.")
 	flag.Parse()
 
-	prog, err := pords.StartProgram(debug)
+	prog, err := program.StartProgram(debug)
 	if err != nil {
 		fmt.Println("NO! It didn't WORK!")
 		fmt.Println(err)
