@@ -33,7 +33,7 @@ type LoginInfoBuilder struct {
 	siteName          []byte
 	userName          []byte
 	seed              []byte
-	prog              *PordsProgram
+	prog              *GnocchiProgram
 	generatedPwLength int
 	specialChars      []byte
 }

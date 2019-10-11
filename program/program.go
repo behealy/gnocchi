@@ -30,7 +30,7 @@ type parser struct {
 	entryCursor  int
 }
 
-type PordsProgram struct {
+type GnocchiProgram struct {
 	state         ProgramState
 	MasterPw      []byte
 	logins        []*LoginInfo
@@ -50,11 +50,11 @@ func help() {
 	`)
 }
 
-func (prog *PordsProgram) setState(st ProgramState) {
+func (prog *GnocchiProgram) setState(st ProgramState) {
 	prog.state = st
 }
 
-func (prog *PordsProgram) PrintPrompt() {
+func (prog *GnocchiProgram) PrintPrompt() {
 	switch prog.state {
 	case stateMain:
 		fmt.Print("PORDS-> ")
@@ -63,7 +63,7 @@ func (prog *PordsProgram) PrintPrompt() {
 	}
 }
 
-func (prog *PordsProgram) HandleInput(input string) error {
+func (prog *GnocchiProgram) HandleInput(input string) error {
 	switch prog.state {
 	case stateMain:
 		return prog.handleInput(input)
@@ -88,7 +88,7 @@ func (prog *PordsProgram) HandleInput(input string) error {
 	return nil
 }
 
-func (prog *PordsProgram) handleInput(input string) error {
+func (prog *GnocchiProgram) handleInput(input string) error {
 
 	args := strings.Fields(strings.TrimSpace(input))
 	in := args[0]
@@ -152,7 +152,7 @@ func (prog *PordsProgram) handleInput(input string) error {
 	}
 }
 
-func (prog *PordsProgram) list(args []string) {
+func (prog *GnocchiProgram) list(args []string) {
 	l := len(prog.logins)
 
 	if l == 0 {
@@ -168,16 +168,16 @@ func (prog *PordsProgram) list(args []string) {
 	}
 }
 
-func (prog *PordsProgram) addLoginInfo(li *LoginInfo) {
+func (prog *GnocchiProgram) addLoginInfo(li *LoginInfo) {
 	prog.logins = append(prog.logins, li)
 	prog.loginsLut[li.siteName] = li
 }
 
-func (prog *PordsProgram) MasterPwIsSet() bool {
+func (prog *GnocchiProgram) MasterPwIsSet() bool {
 	return len(prog.MasterPw) > 0
 }
 
-func (prog *PordsProgram) init(cacheDir string) error {
+func (prog *GnocchiProgram) init(cacheDir string) error {
 
 	prog.cacheFilePath = cacheDir
 
@@ -194,7 +194,7 @@ func (prog *PordsProgram) init(cacheDir string) error {
 	var bizyte byte
 
 	if prog.Debug == true {
-		fmt.Println("Init PordsProgram")
+		fmt.Println("Init GnocchiProgram")
 	}
 
 	_, err := os.Stat(prog.cacheFilePath)
@@ -276,7 +276,7 @@ func (prog *PordsProgram) init(cacheDir string) error {
 	}
 }
 
-func (prog *PordsProgram) write() error {
+func (prog *GnocchiProgram) write() error {
 
 	if prog.Debug == true {
 		fmt.Println("Attempting write to " + prog.cacheFilePath)
@@ -339,9 +339,9 @@ func (prog *PordsProgram) write() error {
 	return err
 }
 
-// StartProgram - Initializes new PordsProgram
-func StartProgram(debug bool) (*PordsProgram, error) {
-	prog := &PordsProgram{
+// StartProgram - Initializes new GnocchiProgram
+func StartProgram(debug bool) (*GnocchiProgram, error) {
+	prog := &GnocchiProgram{
 		state:     stateMain,
 		loginsLut: make(map[string]*LoginInfo),
 	}
@@ -353,6 +353,7 @@ func StartProgram(debug bool) (*PordsProgram, error) {
 	prog.newLoginChildProgram = &NewLoginProgramModule{}
 
 	homedir, err := homedir.Dir()
+	fmt.Println(homedir)
 
 	if err != nil {
 		return prog, err

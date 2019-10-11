@@ -5,6 +5,9 @@
 *.so
 *.dylib
 
+#ignore go build output
+gnocchi
+
 # Test binary, build with `go test -c`
 *.test
 

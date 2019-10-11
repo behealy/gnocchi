@@ -25,7 +25,7 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("Welcome, to PORDS")
+	fmt.Println("Welcome, to GNOCCHI")
 	if prog.Debug == true {
 		fmt.Println("DEBUG MODE ON")
 	}
