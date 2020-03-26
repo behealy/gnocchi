@@ -46,7 +46,6 @@ func main() {
 					fmt.Println(err)
 				}
 			}
-
 		} else {
 			prog.PrintPrompt()
 			text, _ := reader.ReadString('\n')

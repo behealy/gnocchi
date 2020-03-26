@@ -46,7 +46,9 @@ func help() {
 	fmt.Println(`PORDS accepts the following commands:
 	'new' - add a new account for which to save a password.
 	'list' - list all accounts that you currently have saved for which passwords are generated.
-	'get - get password for an account. Enter the Site name value.
+	'get' - get password for an account. Enter the Site name value.
+	'regen' - generate a new password for a given account.
+	'edit' - change special characters used in password or the length of the password. (CAUTION: this will regenerate the password!s)
 	`)
 }
 
@@ -58,6 +60,8 @@ func (prog *GnocchiProgram) PrintPrompt() {
 	switch prog.state {
 	case stateMain:
 		fmt.Print("PORDS-> ")
+	case stateEdit:
+		fallthrough
 	case stateCreateNew:
 		prog.newLoginChildProgram.PrintPrompt()
 	}
